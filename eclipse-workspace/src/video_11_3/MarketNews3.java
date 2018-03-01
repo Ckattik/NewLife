@@ -1,4 +1,4 @@
-package video_11_2;
+package video_11_3;
 
 public class MarketNews3 extends Thread {
 
@@ -11,7 +11,7 @@ public class MarketNews3 extends Thread {
 		
 		for(int i = 0; i < 10; i++) {
 			try {
-				sleep(5000); // for 1 seconds
+				sleep(1000); // for 1 seconds
 				System.out.println("The market is improving " + i);
 				System.out.println();
 				
