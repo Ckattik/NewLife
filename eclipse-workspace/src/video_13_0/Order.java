@@ -1,6 +1,6 @@
 package video_13_0;
 
-public class Oder {
+public class Order {
 
 	public int oderID;
 	public String stockSymbol;
@@ -9,7 +9,7 @@ public class Oder {
 	
 	
 	
-	public Oder(int ID, String stockSymbol, int quantity, float price) {
+	public Order(int ID, String stockSymbol, int quantity, float price) {
 		
 		this.oderID = ID;
 		this.stockSymbol = stockSymbol;

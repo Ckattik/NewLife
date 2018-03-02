@@ -4,6 +4,7 @@ import java.awt.List;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -16,64 +17,127 @@ public class MyFrame extends JFrame implements TableModelListener{
 	
 	public MyFrame(String winTitle){
 		super(winTitle);
+	
+		myTableModel = new MyTableModel();
+		myTable = new JTable(myTableModel);
+		
+//		Add the JTable to frame and enable scrolling
+		
+		add(new JScrollPane(myTable));
+		
+//	Register an event listener	
+		myTableModel.addTableModelListener(this);
+		
 		
 	}
 	
-	myTableModel = new MyTableModel();
+	
 	
 	
 	
 	@Override
-	public void tableChanged(TableModelEvent arg0) {
+	public void tableChanged(TableModelEvent e) {
 		// TODO Auto-generated method stub
+		System.out.println("Someone changed the data in JTable!");
+	}
+	
+	
+	public static void main(String [] args) {
+		
+		MyFrame frame = new MyFrame("My test Window");
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		
+		
+		frame.setVisible(true);
 		
 	}
 	
 	
-	
-	
-	
 
 	class MyTableModel extends AbstractTableModel {
-
+        // The data for JTable should be here
+		java.util.List<Order> myData = new ArrayList<>();
 		
-		 // The data for JTable should be here
-		
-		
-		
-		List<Order> myData = new ArrayList<Order>();
+		String [] orderColNames = {"OrderID", "Symbol", "Quantity", "Price"};
 		
 		
-		
-		
-		
-		
-		
-		
-		
+		public MyTableModel () {
+			
+			myData.add(new Order(1, "IBM", 100, 135.5f));
+			myData.add(new Order(2, "APPL", 200, 290.5f));
+			myData.add(new Order(3, "MOT", 2000, 5.8f));
+			myData.add(new Order(4, "RLC", 500, 13.7f));
+		}
 		
 		@Override
 		public int getColumnCount() {
 			// TODO Auto-generated method stub
-			return 0;
+			return 4;
 		}
 
 		@Override
 		public int getRowCount() {
 			// TODO Auto-generated method stub
-			return 0;
+			return myData.size();
 		}
 
 		@Override
-		public Object getValueAt(int arg0, int arg1) {
+		public Object getValueAt(int row, int col) {
 			// TODO Auto-generated method stub
-			return null;
+			
+			switch(col) {
+			
+			case 0:    // col 1
+				return myData.get(row).oderID;
+				
+			case 1: //col 2
+				return myData.get(row).stockSymbol;
+				
+			case 2: //col 3
+				return myData.get(row).quantity;
+			
+			case 3:  //col 4
+				return myData.get(row).price;
+				
+				default:
+					return "";
+				}
+		}
+		
+		public String getColumnName(int col) {
+			
+			return orderColNames[col];
+		}
+		
+		
+		public boolean isCellEditable(int row, int col) {
+			
+			if(col == 2) {
+				return true;
+				
+			}else {
+				return false;
+			}
+			
 		}
 		
 		
 		
 		
 		
+		
+		
+		// Update the model when the use changes the quantity
+		public void setValueAt(Object value, int row, int col) {
+			if(col == 2) {
+				myData.get(row).quantity = (Integer.valueOf(value.toString()));
+			}
+			
+			TableModelEvent event = new TableModelEvent(this, row, row, col);
+			fireTableChanged(event);
+		}
 		
 	}
 	
