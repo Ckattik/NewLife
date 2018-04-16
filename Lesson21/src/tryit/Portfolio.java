@@ -1,6 +1,7 @@
 package tryit;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +14,7 @@ public class Portfolio implements Runnable{
 	public void run() {
 
 		try (Connection conn = DriverManager.getConnection( 
-                "jdbc:derby://localhost:1527/Lesson21");
+                "jdbc:derby://localhost:1527/sample", "ckatt","5251356qqQ");
              Statement stmt = conn.createStatement(); 
              ResultSet rs = stmt.executeQuery(sqlQuery);){
 			

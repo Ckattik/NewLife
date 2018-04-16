@@ -18,7 +18,7 @@ public class OrderDAO {
 		String sqlQuery = "Select * from Portfolio";
 		
 		try (Connection conn = DriverManager.getConnection( 
-                "jdbc:derby://localhost:1527/Lesson21");
+                "jdbc:derby://localhost:1527/Lesson22");
              Statement stmt = conn.createStatement(); 
              ResultSet rs = stmt.executeQuery(sqlQuery);){
 			

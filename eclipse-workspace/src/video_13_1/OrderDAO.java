@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 //The Data Access Object to get orders from 
 //the database table Portfolio
 public class OrderDAO {
@@ -18,36 +20,29 @@ public class OrderDAO {
 		
 		String sqlQuery = "SELECT * from Portfolio";
 		
-		try {
+		try (Connection conn = DriverManager.getConnection( 
+                "jdbc:derby://localhost:1527/Lesson22");
+             Statement stmt = conn.createStatement(); 
+             ResultSet rs = stmt.executeQuery(sqlQuery);){
 			
-			Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/Lesson22");
-			Statement stmt = conn.createStatement();
-			ResultSet rs =  stmt.executeQuery(sqlQuery);
-			
-			
-			
-			while(rs.next()) {
+			while (rs.next()) {
 				Integer id = rs.getInt("id");
 				String symbol = rs.getString("symbol");
 				Integer quantity = rs.getInt("quantity");
 				Float price = rs.getFloat("price");
+                
+				orders.add(new Order(id,symbol,quantity,price));
 				
-				
-				orders.add(new Order(id, symbol, quantity, price));
 			}
-			
-			
-		}catch(SQLException e) {
-			System.out.println("SQL Error :" + e.getMessage() + ", the DB error code is  " + e.getErrorCode());
-			
-		}catch(Exception se) {
-			se.printStackTrace();
+		} catch (SQLException se) {
+			System.out.println("SQL Error: " + se.getMessage() +
+					           ", the db error code is " + se.getErrorCode());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		return orders;
-		
 	}
-	
 	
 	
 }

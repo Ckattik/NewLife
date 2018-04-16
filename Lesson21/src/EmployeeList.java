@@ -10,7 +10,7 @@ class EmployeeList {
    String sqlQuery = "SELECT * from Employee"; 
 
    // Open autocloseable Connection, Statement and get the result set
-   try (Connection conn = DriverManager.getConnection( "jdbc:derby://localhost:1527/Lesson21");
+   try (Connection conn = DriverManager.getConnection( "jdbc:derby://localhost:1527/Lesson22");
 		Statement stmt = conn.createStatement(); 
 		ResultSet rs = stmt.executeQuery(sqlQuery); ) {  
 

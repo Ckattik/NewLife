@@ -12,12 +12,6 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
 
-
-
-
-
-
-
 public class MyFrame extends JFrame implements TableModelListener {
 
 	@Override

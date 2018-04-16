@@ -14,6 +14,7 @@ public class MyFrameWithCustomRenderer  extends JFrame implements TableModelList
 	MyTableModel myTableModel; 
 	JTable myTable;
 
+
  MyFrameWithCustomRenderer (String winTitle){
   super(winTitle);
   
@@ -59,6 +60,8 @@ public class MyFrameWithCustomRenderer  extends JFrame implements TableModelList
   );    // end of setCellRenderer(...)
    
  }
+
+
 
  public void tableChanged(TableModelEvent e) {
   // Code to process data changes goes here

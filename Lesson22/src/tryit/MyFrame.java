@@ -20,7 +20,7 @@ public class MyFrame  extends JFrame implements TableModelListener{
   myTable = new JTable(myTableModel );
 
   //Add the JTable to frame and enable scrolling 
-  add(new JScrollPane( myTable));
+  add(new JScrollPane(myTable));
 
   // Register an event listener
    myTableModel.addTableModelListener(this);   
@@ -41,6 +41,7 @@ public class MyFrame  extends JFrame implements TableModelListener{
 }  
 
  class MyTableModel extends AbstractTableModel {
+
 
 	List<Order> myData = new ArrayList<>();
 	String[] orderColNames = { "Order ID",   "Symbol", 
